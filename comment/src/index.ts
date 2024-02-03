@@ -31,7 +31,7 @@ app.post("/posts/:id/comments", (req: Request, res: Response) => {
 
   const postID: string = req.params?.id;
 
-  const comments = commentsByPostId[postID];
+  const comments = commentsByPostId[postID] || [];
 
   comments.push({ id, content });
 

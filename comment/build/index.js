@@ -19,7 +19,7 @@ app.post("/posts/:id/comments", (req, res) => {
     const id = (0, crypto_1.randomBytes)(4).toString("hex");
     const content = (_a = req.body) === null || _a === void 0 ? void 0 : _a.content;
     const postID = (_b = req.params) === null || _b === void 0 ? void 0 : _b.id;
-    const comments = commentsByPostId[postID];
+    const comments = commentsByPostId[postID] || [];
     comments.push({ id, content });
     commentsByPostId[postID] = comments;
     res.status(201).send(comments);
