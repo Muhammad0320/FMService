@@ -9,13 +9,13 @@ console.log("Hi mom");
 
 app.use(bodyParser.json());
 
-export interface Body {
+export interface ReqBody {
   id: string;
   content: string;
 }
 
 interface Posts {
-  [key: string]: Body;
+  [key: string]: ReqBody;
 }
 
 interface ReqWithBoody extends Request {
