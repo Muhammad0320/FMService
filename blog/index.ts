@@ -40,3 +40,9 @@ app.post("/posts", (req: ReqWithBoody, res: Response) => {
 
   res.status(201).send();
 });
+
+const port = 4000;
+
+app.listen(port, () => {
+  console.log(`Listening to port ${port}`);
+});
