@@ -9,9 +9,9 @@ console.log("Hi mom");
 
 app.use(bodyParser.json());
 
-interface Body {
+export interface Body {
   id: string;
-  title: string;
+  content: string;
 }
 
 interface Posts {
@@ -31,14 +31,14 @@ app.get("/posts", (req: Request, res: Response) => {
 app.post("/posts", (req: ReqWithBoody, res: Response) => {
   const id = randomBytes(4).toString("hex");
 
-  const { title } = req.body;
+  const { content } = req.body;
 
   posts[id] = {
     id,
-    title,
+    content,
   };
 
-  res.status(201).send();
+  res.status(201).send(posts[id]);
 });
 
 const port = 4000;

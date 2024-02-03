@@ -15,12 +15,12 @@ app.get("/posts", (req, res) => {
 });
 app.post("/posts", (req, res) => {
     const id = (0, crypto_1.randomBytes)(4).toString("hex");
-    const { title } = req.body;
+    const { content } = req.body;
     posts[id] = {
         id,
-        title,
+        content,
     };
-    res.status(201).send();
+    res.status(201).send(posts[id]);
 });
 const port = 4000;
 app.listen(port, () => {
