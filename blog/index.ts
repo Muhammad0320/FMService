@@ -9,22 +9,26 @@ console.log("Hi mom");
 
 app.use(bodyParser.json());
 
-interface Posts {
+interface Body {
   id: string;
   title: string;
 }
 
-interface ReqWithBoody extends Request {
-  body?: { [key: string]: string };
+interface Posts {
+  [key: string]: Body;
 }
 
-const posts = {};
+interface ReqWithBoody extends Request {
+  body: { [key: string]: string };
+}
+
+const posts: Posts = {};
 
 app.get("/posts", (req: Request, res: Response) => {
   res.send(posts);
 });
 
-app.post("/posts", (req: Request, res: Response) => {
+app.post("/posts", (req: ReqWithBoody, res: Response) => {
   const id = randomBytes(4).toString("hex");
 
   const { title } = req.body;
