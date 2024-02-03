@@ -20,11 +20,11 @@ interface Comments {
 
 const commentsByPostId: Comments = {};
 
-app.get("/comments", (req: Request, res: Response) => {
-  res.send(commentsByPostId);
+app.get("/post/:id/comments", (req: Request, res: Response) => {
+  res.send(commentsByPostId[req.params?.id as string]);
 });
 
-app.post("/commwnts", (req: Request, res: Response) => {
+app.post("/post/:id/comments", (req: Request, res: Response) => {
   const id = randomBytes(4).toString("hex");
 
   const content: string = req.body?.content;
