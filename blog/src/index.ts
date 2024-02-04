@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { randomBytes } from "crypto";
-
+import cors from "cors";
 import bodyParser from "body-parser";
 
 const app = express();
@@ -8,6 +8,7 @@ const app = express();
 console.log("Hi mom");
 
 app.use(bodyParser.json());
+app.use(cors());
 
 export interface ReqBody {
   id: string;
