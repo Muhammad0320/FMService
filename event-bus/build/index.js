@@ -22,7 +22,7 @@ app.post("/events", (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     const event = req.body;
     yield axios_1.default.post("http://localhost:4000/event", event);
     yield axios_1.default.post("http://localhost:4001/event", event);
-    yield axios_1.default.post("http://localhost:4002/event", event);
+    //   await axios.post("http://localhost:4002/event", event);
     res.send("OK");
 }));
 const port = 4005;
