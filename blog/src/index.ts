@@ -12,9 +12,14 @@ console.log("Hi mom");
 app.use(bodyParser.json());
 app.use(cors());
 
-export interface ReqBody {
+interface ReqBody {
   id: string;
   content: string;
+}
+
+interface ReqEventBus {
+  type: string;
+  data: ReqBody;
 }
 
 interface Posts {
@@ -47,6 +52,14 @@ app.post("/posts", async (req: ReqWithBoody, res: Response): Promise<void> => {
   });
 
   res.status(201).send(posts[id]);
+});
+
+app.post("/events", (req: Request, res: Response) => {
+  const result: ReqEventBus = req.body;
+
+  console.log("Event Recieved", result.type);
+
+  res.send({});
 });
 
 const port = 4000;
