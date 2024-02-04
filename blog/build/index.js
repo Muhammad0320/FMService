@@ -32,11 +32,11 @@ app.post("/posts", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         id,
         content,
     };
+    res.status(201).send(posts[id]);
     yield axios_1.default.post("http://localhost:4005/events", {
         type: "postsCreated",
         data: { id, content },
     });
-    res.status(201).send(posts[id]);
 }));
 app.post("/event", (req, res) => {
     const result = req.body;

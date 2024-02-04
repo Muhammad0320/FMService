@@ -9,19 +9,21 @@ const CommentList = ({ postId }) => {
       `http://localhost:4001/posts/${postId}/comments`
     );
 
+    console.log(res.data);
+
     setComments(res.data);
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
-  const renderedComments = comments.map((comment) => {
-    return <li key={comment.id}>{comment.content}</li>;
-  });
+  // const renderedComments = comments?.map((comment) => {
+  //   return <li key={comment?.id}>{comment?.content}</li>;
+  // });
 
-  return <ul>{renderedComments}</ul>;
+  // return <ul>{renderedComments}</ul>;
+  return <div> okay </div>;
 };
 
 export default CommentList;
-

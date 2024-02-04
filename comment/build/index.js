@@ -34,6 +34,7 @@ app.post("/posts/:id/comments", (req, res) => __awaiter(void 0, void 0, void 0, 
     const comments = commentsByPostId[postId] || [];
     comments.push({ id, content });
     commentsByPostId[postId] = comments;
+    res.status(201).send(comments);
     yield axios_1.default.post("http://localhost:4005", {
         type: "commentCreated",
         data: {
@@ -42,7 +43,6 @@ app.post("/posts/:id/comments", (req, res) => __awaiter(void 0, void 0, void 0, 
             postId,
         },
     });
-    res.status(201).send(comments);
 }));
 app.post("/event", (req, res) => {
     const result = req.body;

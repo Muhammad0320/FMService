@@ -49,6 +49,8 @@ app.post(
 
     commentsByPostId[postId] = comments;
 
+    res.status(201).send(comments);
+
     await axios.post("http://localhost:4005", {
       type: "commentCreated",
       data: {
@@ -57,8 +59,6 @@ app.post(
         postId,
       },
     });
-
-    res.status(201).send(comments);
   }
 );
 
