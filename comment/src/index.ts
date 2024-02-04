@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 
 import { randomBytes } from "crypto";
 
+import cors from "cors";
+
 import bodyParser from "body-parser";
 
 interface ReqBody {
@@ -11,6 +13,7 @@ interface ReqBody {
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 console.log("Hi mom");
 
