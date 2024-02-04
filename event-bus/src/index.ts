@@ -1,6 +1,6 @@
-import express, { Request, Response } from "express";
-import bodyParser from "body-parser";
 import axios from "axios";
+import bodyParser from "body-parser";
+import express, { Request, Response } from "express";
 
 const app = express();
 
@@ -14,6 +14,8 @@ app.post("/events", async (req: Request, res: Response) => {
   await axios.post("http://localhost:4000/event", event);
   await axios.post("http://localhost:4001/event", event);
   await axios.post("http://localhost:4002/event", event);
+
+  res.send("OK");
 });
 
 const port = 4005;

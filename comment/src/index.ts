@@ -10,6 +10,12 @@ import axios from "axios";
 interface ReqBody {
   id: string;
   content: string;
+  postId?: string;
+}
+
+interface ReqEventBus {
+  type: string;
+  data: ReqBody;
 }
 
 const app = express();
@@ -55,6 +61,14 @@ app.post(
     res.status(201).send(comments);
   }
 );
+
+app.post("/events", (req: Request, res: Response) => {
+  const result: ReqEventBus = req.body;
+
+  console.log("Event Recieved", result.type);
+
+  res.send({});
+});
 
 const port = 4001;
 
