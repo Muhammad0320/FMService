@@ -41,7 +41,7 @@ app.post("/posts", async (req: ReqWithBoody, res: Response): Promise<void> => {
     content,
   };
 
-  await axios.post("./http://localhost:4005/events", {
+  await axios.post("http://localhost:4005/events", {
     type: "postsCreated",
     data: { id, content },
   });

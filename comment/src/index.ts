@@ -5,6 +5,7 @@ import { randomBytes } from "crypto";
 import cors from "cors";
 
 import bodyParser from "body-parser";
+import axios from "axios";
 
 interface ReqBody {
   id: string;
@@ -27,21 +28,33 @@ app.get("/posts/:id/comments", (req: Request, res: Response) => {
   res.send(commentsByPostId[req.params?.id as string]);
 });
 
-app.post("/posts/:id/comments", (req: Request, res: Response) => {
-  const id = randomBytes(4).toString("hex");
+app.post(
+  "/posts/:id/comments",
+  async (req: Request, res: Response): Promise<void> => {
+    const id = randomBytes(4).toString("hex");
 
-  const content: string = req.body?.content;
+    const content: string = req.body?.content;
 
-  const postID: string = req.params?.id;
+    const postId: string = req.params?.id;
 
-  const comments = commentsByPostId[postID] || [];
+    const comments = commentsByPostId[postId] || [];
 
-  comments.push({ id, content });
+    comments.push({ id, content });
 
-  commentsByPostId[postID] = comments;
+    commentsByPostId[postId] = comments;
 
-  res.status(201).send(comments);
-});
+    await axios.post("http://localhost:4005", {
+      type: "commentCreated",
+      data: {
+        id,
+        content,
+        postId,
+      },
+    });
+
+    res.status(201).send(comments);
+  }
+);
 
 const port = 4001;
 
