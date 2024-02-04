@@ -62,7 +62,7 @@ app.post(
   }
 );
 
-app.post("/events", (req: Request, res: Response) => {
+app.post("/event", (req: Request, res: Response) => {
   const result: ReqEventBus = req.body;
 
   console.log("Event Recieved", result.type);

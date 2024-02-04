@@ -54,7 +54,7 @@ app.post("/posts", async (req: ReqWithBoody, res: Response): Promise<void> => {
   res.status(201).send(posts[id]);
 });
 
-app.post("/events", (req: Request, res: Response) => {
+app.post("/event", (req: Request, res: Response) => {
   const result: ReqEventBus = req.body;
 
   console.log("Event Recieved", result.type);

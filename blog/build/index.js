@@ -38,7 +38,7 @@ app.post("/posts", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     });
     res.status(201).send(posts[id]);
 }));
-app.post("/events", (req, res) => {
+app.post("/event", (req, res) => {
     const result = req.body;
     console.log("Event Recieved", result.type);
     res.send({});

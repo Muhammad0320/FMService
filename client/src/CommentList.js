@@ -24,3 +24,4 @@ const CommentList = ({ postId }) => {
 };
 
 export default CommentList;
+

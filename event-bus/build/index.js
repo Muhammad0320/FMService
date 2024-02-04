@@ -20,8 +20,8 @@ console.log("Hi mom");
 app.use(body_parser_1.default.json());
 app.post("/events", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const event = req.body;
-    yield axios_1.default.post("http://localhost:4000/event", event);
-    yield axios_1.default.post("http://localhost:4001/event", event);
+    yield axios_1.default.post("http://localhost:4000/event", event).catch(console.log);
+    yield axios_1.default.post("http://localhost:4001/event", event).catch(console.log);
     //   await axios.post("http://localhost:4002/event", event);
     res.send("OK");
 }));
