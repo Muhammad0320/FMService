@@ -35,14 +35,21 @@ app.post("/posts/:id/comments", (req, res) => __awaiter(void 0, void 0, void 0, 
     comments.push({ id, content });
     commentsByPostId[postId] = comments;
     res.status(201).send(comments);
-    yield axios_1.default.post("http://localhost:4005", {
-        type: "commentCreated",
-        data: {
-            id,
-            content,
-            postId,
-        },
-    });
+    try {
+        yield axios_1.default.post("http://localhost:4005/events", {
+            type: "commentCreated",
+            data: {
+                id,
+                content,
+                postId,
+            },
+        });
+    }
+    catch (error) {
+        if (error instanceof Error) {
+            console.log(error.message);
+        }
+    }
 }));
 app.post("/event", (req, res) => {
     const result = req.body;

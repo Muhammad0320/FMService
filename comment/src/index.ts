@@ -10,8 +10,9 @@ import axios from "axios";
 interface ReqBody {
   id: string;
   content: string;
-  postId?: string;
 }
+
+// postId?: string;
 
 interface ReqEventBus {
   type: string;
@@ -51,14 +52,20 @@ app.post(
 
     res.status(201).send(comments);
 
-    await axios.post("http://localhost:4005", {
-      type: "commentCreated",
-      data: {
-        id,
-        content,
-        postId,
-      },
-    });
+    try {
+      await axios.post("http://localhost:4005/events", {
+        type: "commentCreated",
+        data: {
+          id,
+          content,
+          postId,
+        },
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
+    }
   }
 );
 

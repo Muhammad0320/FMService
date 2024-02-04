@@ -11,19 +11,19 @@ const CommentList = ({ postId }) => {
 
     console.log(res.data);
 
-    setComments(res.data);
+    setComments(res.data || []);
   };
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  // const renderedComments = comments?.map((comment) => {
-  //   return <li key={comment?.id}>{comment?.content}</li>;
-  // });
+  const renderedComments = comments?.map((comment) => {
+    return <li key={comment?.id}>{comment?.content}</li>;
+  });
 
-  // return <ul>{renderedComments}</ul>;
-  return <div> okay </div>;
+  return <ul>{renderedComments}</ul>;
+  // return <div> okay </div>;
 };
 
 export default CommentList;
