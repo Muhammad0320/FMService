@@ -11,9 +11,49 @@ app.use(cors());
 
 console.log("Hi mom");
 
-app.get("/posts", (req: Request, res: Response) => {});
+interface Body {
+  id: string;
+  content: string;
+}
 
-app.post("/events", (req: Request, res: Response) => {});
+interface BodyofPost extends Request {
+  body: {
+    type: "postCreated";
+    data: Body;
+  };
+}
+
+interface BodyofComment extends Request {
+  body: {
+    type: "commentCreated";
+    data: Body & { postId: string };
+  };
+}
+
+interface Post {
+  [key: string]: Body & { comments: Body[] };
+}
+
+const post: Post = {};
+
+app.get("/posts", (req: Request, res: Response) => {
+  res.send(post);
+});
+
+app.post("/events", (req: BodyofComment | BodyofPost, res: Response) => {
+  const { data, type } = req.body;
+
+  if (type === "postCreated") {
+    post[data.id] = { id: data.id, content: data.content, comments: [] };
+  }
+
+  if (type === "commentCreated") {
+    post[data.postId].comments.push({ id: data.id, content: data.content });
+  }
+
+  console.log(post);
+  res.send({});
+});
 
 const port = 4002;
 
