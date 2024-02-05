@@ -40,7 +40,7 @@ app.get("/posts", (req: Request, res: Response) => {
   res.send(post);
 });
 
-app.post("/events", (req: BodyofComment | BodyofPost, res: Response) => {
+app.post("/event", (req: BodyofComment | BodyofPost, res: Response) => {
   const { data, type } = req.body;
 
   if (type === "postCreated") {
