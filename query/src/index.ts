@@ -18,7 +18,7 @@ interface Body {
 
 interface BodyofPost extends Request {
   body: {
-    type: "postCreated";
+    type: "postsCreated";
     data: Body;
   };
 }
@@ -43,7 +43,8 @@ app.get("/posts", (req: Request, res: Response) => {
 app.post("/event", (req: BodyofComment | BodyofPost, res: Response) => {
   const { data, type } = req.body;
 
-  if (type === "postCreated") {
+  if (type === "postsCreated") {
+    console.log("I ocured");
     post[data.id] = { id: data.id, content: data.content, comments: [] };
   }
 
@@ -51,7 +52,6 @@ app.post("/event", (req: BodyofComment | BodyofPost, res: Response) => {
     post[data.postId].comments.push({ id: data.id, content: data.content });
   }
 
-  console.log(post);
   res.send({});
 });
 

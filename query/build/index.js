@@ -16,13 +16,13 @@ app.get("/posts", (req, res) => {
 });
 app.post("/event", (req, res) => {
     const { data, type } = req.body;
-    if (type === "postCreated") {
+    if (type === "postsCreated") {
+        console.log("I ocured");
         post[data.id] = { id: data.id, content: data.content, comments: [] };
     }
     if (type === "commentCreated") {
         post[data.postId].comments.push({ id: data.id, content: data.content });
     }
-    console.log(post);
     res.send({});
 });
 const port = 4002;
