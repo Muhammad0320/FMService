@@ -32,7 +32,7 @@ app.post("/posts/:id/comments", (req, res) => __awaiter(void 0, void 0, void 0, 
     const content = (_a = req.body) === null || _a === void 0 ? void 0 : _a.content;
     const postId = (_b = req.params) === null || _b === void 0 ? void 0 : _b.id;
     const comments = commentsByPostId[postId] || [];
-    comments.push({ id, content });
+    comments.push({ id, content, status: "pending" });
     commentsByPostId[postId] = comments;
     res.status(201).send(comments);
     try {
@@ -42,6 +42,7 @@ app.post("/posts/:id/comments", (req, res) => __awaiter(void 0, void 0, void 0, 
                 id,
                 content,
                 postId,
+                status: "pending",
             },
         });
     }

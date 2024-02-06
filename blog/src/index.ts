@@ -1,9 +1,8 @@
-import cors from "cors";
-
 import express, { Request, Response } from "express";
 import { randomBytes } from "crypto";
 import bodyParser from "body-parser";
 import axios from "axios";
+import cors from "cors";
 
 const app = express();
 

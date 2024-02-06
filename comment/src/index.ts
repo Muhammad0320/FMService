@@ -25,8 +25,10 @@ app.use(cors());
 
 console.log("Hi mom");
 
+type CommentType = ReqBody & { status: "pending" };
+
 interface Comments {
-  [key: string]: ReqBody[];
+  [key: string]: CommentType[];
 }
 
 const commentsByPostId: Comments = {};
@@ -46,7 +48,7 @@ app.post(
 
     const comments = commentsByPostId[postId] || [];
 
-    comments.push({ id, content });
+    comments.push({ id, content, status: "pending" });
 
     commentsByPostId[postId] = comments;
 
@@ -59,6 +61,7 @@ app.post(
           id,
           content,
           postId,
+          status: "pending",
         },
       });
     } catch (error) {
