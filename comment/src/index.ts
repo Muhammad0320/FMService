@@ -86,24 +86,15 @@ app.post("/event", async (req: Request, res: Response): Promise<void> => {
   const { type, data } = result;
 
   if (type === "commentModerated") {
-    console.log(data, "This is comment morderated check");
-
-    console.log(commentsByPostId);
-
     const comment = commentsByPostId[data.postId].find(
       (comment) => comment.id === data.id
     );
 
-    console.log(comment, "shittttttttttttttttttttttttt");
-
     if (comment) {
       comment.status = data.status;
     } else {
-      console.log("There is no commnet...................................... ");
       return;
     }
-
-    console.log("It did reached here 55");
 
     await axios.post("http://localhost:4005/events", {
       type: "commentUpdated",
