@@ -23,7 +23,7 @@ app.post("/event", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     const { type, data } = result;
     const status = data.content.includes("orange") ? "rejected" : "approved";
     yield axios_1.default.post("http://localhost:4005/event", {
-        type,
+        type: "commentModerated",
         data: Object.assign(Object.assign({}, data), { status }),
     });
     res.send({});

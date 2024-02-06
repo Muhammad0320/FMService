@@ -9,8 +9,6 @@ interface ReqBody {
   content: string;
 }
 
-// postId?: string;
-
 interface ReqEventBus {
   type: string;
   data: ReqBody;
@@ -30,7 +28,7 @@ app.post("/event", async (req: Request, res: Response): Promise<void> => {
   const status = data.content.includes("orange") ? "rejected" : "approved";
 
   await axios.post("http://localhost:4005/event", {
-    type,
+    type: "commentModerated",
     data: { ...data, status },
   });
 

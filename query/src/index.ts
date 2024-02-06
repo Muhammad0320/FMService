@@ -26,7 +26,14 @@ interface BodyofPost extends Request {
 interface BodyofComment extends Request {
   body: {
     type: "commentCreated";
-    data: Body & { postId: string };
+    data: Body & { postId: string; status: string };
+  };
+}
+
+interface BodyofCommentUpdated extends Request {
+  body: {
+    type: "commentUpdated";
+    data: Body & { postId: string; status: string };
   };
 }
 
@@ -40,20 +47,25 @@ app.get("/posts", (req: Request, res: Response) => {
   res.send(post);
 });
 
-app.post("/event", (req: BodyofComment | BodyofPost, res: Response) => {
-  const { data, type } = req.body;
+app.post(
+  "/event",
+  (req: BodyofComment | BodyofPost | BodyofCommentUpdated, res: Response) => {
+    const { data, type } = req.body;
 
-  if (type === "postsCreated") {
-    console.log("I ocured");
-    post[data.id] = { id: data.id, content: data.content, comments: [] };
+    if (type === "postsCreated") {
+      post[data.id] = { id: data.id, content: data.content, comments: [] };
+    }
+
+    if (type === "commentCreated") {
+      post[data.postId].comments.push({ id: data.id, content: data.content });
+    }
+
+    if (type === "commentUpdated") {
+    }
+
+    res.send({});
   }
-
-  if (type === "commentCreated") {
-    post[data.postId].comments.push({ id: data.id, content: data.content });
-  }
-
-  res.send({});
-});
+);
 
 const port = 4002;
 
