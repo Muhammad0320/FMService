@@ -1,6 +1,20 @@
-import express from "express";
+import express, { Request, Response } from "express";
+
+import axios from "axios";
 
 import bodyParser from "body-parser";
+
+interface ReqBody {
+  id: string;
+  content: string;
+}
+
+// postId?: string;
+
+interface ReqEventBus {
+  type: string;
+  data: ReqBody;
+}
 
 const app = express();
 
@@ -8,7 +22,20 @@ app.use(bodyParser.json());
 
 console.log("Hi mom");
 
-app.post("/event", () => {});
+app.post("/event", async (req: Request, res: Response): Promise<void> => {
+  const result: ReqEventBus = req.body;
+
+  const { type, data } = result;
+
+  const status = data.content.includes("orange") ? "rejected" : "approved";
+
+  await axios.post("http://localhost:4005/event", {
+    type,
+    data: { ...data, status },
+  });
+
+  res.send({});
+});
 
 const port = 4003;
 
