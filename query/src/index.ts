@@ -14,6 +14,8 @@ console.log("Hi mom");
 interface Body {
   id: string;
   content: string;
+  postId?: string;
+  status?: string;
 }
 
 interface BodyofPost extends Request {
@@ -57,10 +59,22 @@ app.post(
     }
 
     if (type === "commentCreated") {
-      post[data.postId].comments.push({ id: data.id, content: data.content });
+      post[data.postId].comments.push({
+        id: data.id,
+        content: data.content,
+        status: data.status,
+      });
     }
 
     if (type === "commentUpdated") {
+      const comments = post[data.postId].comments.find(
+        (comment) => comment.id === data.id
+      );
+
+      if (comments) {
+        comments.content = data.content;
+        comments.status = data.status;
+      }
     }
 
     res.send({});
