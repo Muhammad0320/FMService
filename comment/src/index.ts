@@ -10,6 +10,8 @@ import axios from "axios";
 interface ReqBody {
   id: string;
   content: string;
+  postId: string;
+  status: string;
 }
 
 // postId?: string;
@@ -25,7 +27,7 @@ app.use(cors());
 
 console.log("Hi mom");
 
-type CommentType = ReqBody & { status: "pending" };
+type CommentType = ReqBody & { status: string };
 
 interface Comments {
   [key: string]: CommentType[];
@@ -48,7 +50,7 @@ app.post(
 
     const comments = commentsByPostId[postId] || [];
 
-    comments.push({ id, content, status: "pending" });
+    comments.push({ id, content, status: "pending", postId });
 
     commentsByPostId[postId] = comments;
 
@@ -72,10 +74,30 @@ app.post(
   }
 );
 
-app.post("/event", (req: Request, res: Response) => {
+app.post("/event", async (req: Request, res: Response): Promise<void> => {
   const result: ReqEventBus = req.body;
 
   console.log("Event Recieved", result.type);
+
+  const {
+    type,
+    data: { id, postId, status },
+  } = result;
+
+  if (type === "commentModerated") {
+    const comment = commentsByPostId[postId].find(
+      (comment) => comment.id === id
+    );
+
+    if (comment) {
+      comment.status = status;
+    }
+
+    await axios.post("http://localhost:4005/event", {
+      type: "commentUpdated",
+      data: comment,
+    });
+  }
 
   res.send({});
 });

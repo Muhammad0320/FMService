@@ -32,7 +32,7 @@ app.post("/posts/:id/comments", (req, res) => __awaiter(void 0, void 0, void 0, 
     const content = (_a = req.body) === null || _a === void 0 ? void 0 : _a.content;
     const postId = (_b = req.params) === null || _b === void 0 ? void 0 : _b.id;
     const comments = commentsByPostId[postId] || [];
-    comments.push({ id, content, status: "pending" });
+    comments.push({ id, content, status: "pending", postId });
     commentsByPostId[postId] = comments;
     res.status(201).send(comments);
     try {
@@ -52,11 +52,22 @@ app.post("/posts/:id/comments", (req, res) => __awaiter(void 0, void 0, void 0, 
         }
     }
 }));
-app.post("/event", (req, res) => {
+app.post("/event", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = req.body;
     console.log("Event Recieved", result.type);
+    const { type, data: { id, postId, status }, } = result;
+    if (type === "commentModerated") {
+        const comment = commentsByPostId[postId].find((comment) => comment.id === id);
+        if (comment) {
+            comment.status = status;
+        }
+        yield axios_1.default.post("http://localhost:4005/event", {
+            type: "commentUpdated",
+            data: comment,
+        });
+    }
     res.send({});
-});
+}));
 const port = 4001;
 app.listen(port, () => {
     console.log(`App running on port ${port}`);
