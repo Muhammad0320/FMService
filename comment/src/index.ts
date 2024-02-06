@@ -35,6 +35,10 @@ interface Comments {
 
 const commentsByPostId: Comments = {};
 
+app.get("/comment", (_, res: Response) => {
+  res.send(commentsByPostId);
+});
+
 app.get("/posts/:id/comments", (req: Request, res: Response) => {
   res.send(commentsByPostId[req.params?.id as string]);
 });
@@ -82,7 +86,9 @@ app.post("/event", async (req: Request, res: Response): Promise<void> => {
   const { type, data } = result;
 
   if (type === "commentModerated") {
-    console.log(data);
+    console.log(data, "This is comment morderated check");
+
+    console.log(commentsByPostId);
 
     const comment = commentsByPostId[data.postId].find(
       (comment) => comment.id === data.id
@@ -91,7 +97,7 @@ app.post("/event", async (req: Request, res: Response): Promise<void> => {
     console.log(comment, "shittttttttttttttttttttttttt");
 
     if (comment) {
-      comment.status = status;
+      comment.status = data.status;
     } else {
       console.log("There is no commnet...................................... ");
       return;
@@ -113,3 +119,7 @@ const port = 4001;
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });
+
+// 6220abdc
+
+// 6220abdc

@@ -22,6 +22,9 @@ app.use(body_parser_1.default.json());
 app.use((0, cors_1.default)());
 console.log("Hi mom");
 const commentsByPostId = {};
+app.get("/comment", (_, res) => {
+    res.send(commentsByPostId);
+});
 app.get("/posts/:id/comments", (req, res) => {
     var _a;
     res.send(commentsByPostId[(_a = req.params) === null || _a === void 0 ? void 0 : _a.id]);
@@ -57,11 +60,12 @@ app.post("/event", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     console.log("Event Recieved", result.type);
     const { type, data } = result;
     if (type === "commentModerated") {
-        console.log(data);
+        console.log(data, "This is comment morderated check");
+        console.log(commentsByPostId);
         const comment = commentsByPostId[data.postId].find((comment) => comment.id === data.id);
         console.log(comment, "shittttttttttttttttttttttttt");
         if (comment) {
-            comment.status = status;
+            comment.status = data.status;
         }
         else {
             console.log("There is no commnet...................................... ");
@@ -79,3 +83,5 @@ const port = 4001;
 app.listen(port, () => {
     console.log(`App running on port ${port}`);
 });
+// 6220abdc
+// 6220abdc
