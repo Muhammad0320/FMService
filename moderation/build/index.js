@@ -24,10 +24,11 @@ app.post("/event", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     console.log(data);
     const status = data.content.includes("orange") ? "rejected" : "approved";
     console.log(status);
-    yield axios_1.default.post("http://localhost:4005/events", {
-        type: "commentModerated",
-        data: Object.assign(Object.assign({}, data), { status }),
-    });
+    if (type === "commentCreated")
+        yield axios_1.default.post("http://localhost:4005/events", {
+            type: "commentModerated",
+            data: Object.assign(Object.assign({}, data), { status }),
+        });
     res.send({});
 }));
 const port = 4003;

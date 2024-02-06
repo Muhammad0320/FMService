@@ -31,10 +31,11 @@ app.post("/event", async (req: Request, res: Response): Promise<void> => {
 
   console.log(status);
 
-  await axios.post("http://localhost:4005/events", {
-    type: "commentModerated",
-    data: { ...data, status },
-  });
+  if (type === "commentCreated")
+    await axios.post("http://localhost:4005/events", {
+      type: "commentModerated",
+      data: { ...data, status },
+    });
 
   res.send({});
 });

@@ -55,11 +55,10 @@ app.post("/posts/:id/comments", (req, res) => __awaiter(void 0, void 0, void 0, 
 app.post("/event", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = req.body;
     console.log("Event Recieved", result.type);
-    const { type, data: { id, postId, status }, } = result;
+    const { type, data } = result;
     if (type === "commentModerated") {
-        console.log(postId);
-        console.log(commentsByPostId[postId]);
-        const comment = commentsByPostId[postId].find((comment) => comment.id === id);
+        console.log(data);
+        const comment = commentsByPostId[data.postId].find((comment) => comment.id === data.id);
         console.log(comment, "shittttttttttttttttttttttttt");
         if (comment) {
             comment.status = status;
