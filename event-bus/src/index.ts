@@ -15,6 +15,7 @@ app.post("/events", async (req: Request, res: Response) => {
 
   await axios.post("http://localhost:4001/event", event).catch(console.log);
   await axios.post("http://localhost:4002/event", event).catch(console.log);
+  await axios.post("http://localhost:4003/event", event).catch(console.log);
 
   res.send("OK");
 });
