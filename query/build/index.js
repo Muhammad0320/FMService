@@ -38,6 +38,7 @@ const handleEvent = (data, type) => {
 };
 app.post("/event", (req, res) => {
     const { data, type } = req.body;
+    handleEvent(data, type);
     res.send({});
 });
 const port = 4002;

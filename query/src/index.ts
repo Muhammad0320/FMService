@@ -82,6 +82,8 @@ app.post(
   (req: BodyofComment | BodyofPost | BodyofCommentUpdated, res: Response) => {
     const { data, type } = req.body;
 
+    handleEvent(data, type);
+
     res.send({});
   }
 );
