@@ -18,14 +18,19 @@ const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 console.log("Hi mom");
 app.use(body_parser_1.default.json());
+let events = [];
 app.post("/events", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const event = req.body;
+    events.push(event);
     yield axios_1.default.post("http://localhost:4000/event", event).catch(console.log);
     yield axios_1.default.post("http://localhost:4001/event", event).catch(console.log);
     yield axios_1.default.post("http://localhost:4002/event", event).catch(console.log);
     yield axios_1.default.post("http://localhost:4003/event", event).catch(console.log);
     res.send("OK");
 }));
+app.get("/events", (req, res) => {
+    res.send(events);
+});
 const port = 4005;
 app.listen(port, () => {
     console.log(`listening to port  ${port} `);

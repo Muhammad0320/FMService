@@ -8,8 +8,22 @@ console.log("Hi mom");
 
 app.use(bodyParser.json());
 
+interface EventBody {
+  type: string;
+  data: {
+    id: string;
+    content?: string;
+    status: string;
+    postId?: string;
+  };
+}
+
+let events: EventBody[] = [];
+
 app.post("/events", async (req: Request, res: Response) => {
   const event = req.body;
+
+  events.push(event);
 
   await axios.post("http://localhost:4000/event", event).catch(console.log);
   await axios.post("http://localhost:4001/event", event).catch(console.log);
@@ -17,6 +31,10 @@ app.post("/events", async (req: Request, res: Response) => {
   await axios.post("http://localhost:4003/event", event).catch(console.log);
 
   res.send("OK");
+});
+
+app.get("/events", (req: Request, res: Response) => {
+  res.send(events);
 });
 
 const port = 4005;
