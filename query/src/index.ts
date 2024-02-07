@@ -49,34 +49,38 @@ app.get("/posts", (req: Request, res: Response) => {
   res.send(post);
 });
 
-app.post(
-  "/event",
-  (req: BodyofComment | BodyofPost | BodyofCommentUpdated, res: Response) => {
-    const { data, type } = req.body;
+const handleEvent = (data: Body, type: string) => {
+  if (type === "postsCreated") {
+    post[data.id] = { id: data.id, content: data.content, comments: [] };
+  }
 
-    if (type === "postsCreated") {
-      post[data.id] = { id: data.id, content: data.content, comments: [] };
-    }
-
-    if (type === "commentCreated") {
+  if (type === "commentCreated") {
+    if (data.postId)
       post[data.postId].comments.push({
         id: data.id,
         content: data.content,
         status: data.status,
       });
-    }
+  }
 
-    if (type === "commentUpdated") {
-      console.log(post[data.postId]);
-      const comments = post[data.postId].comments.find(
+  if (type === "commentUpdated") {
+    let comments;
+    if (data.postId)
+      comments = post[data.postId].comments.find(
         (comment) => comment.id === data.id
       );
 
-      if (comments) {
-        comments.content = data.content;
-        comments.status = data.status;
-      }
+    if (comments) {
+      comments.content = data.content;
+      comments.status = data.status;
     }
+  }
+};
+
+app.post(
+  "/event",
+  (req: BodyofComment | BodyofPost | BodyofCommentUpdated, res: Response) => {
+    const { data, type } = req.body;
 
     res.send({});
   }
