@@ -29,7 +29,6 @@ const handleEvent = (data, type) => {
         post[data.id] = { id: data.id, content: data.content, comments: [] };
     }
     if (type === "commentCreated") {
-        console.log("I created comment");
         if (data.postId)
             post[data.postId].comments.push({
                 id: data.id,
@@ -38,7 +37,6 @@ const handleEvent = (data, type) => {
             });
     }
     if (type === "commentUpdated") {
-        console.log("I update comment");
         let comments;
         if (data.postId)
             comments = post[data.postId].comments.find((comment) => comment.id === data.id);
@@ -60,7 +58,6 @@ app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield axios_1.default.get("http://localhost:4005/events");
         for (const event of res.data) {
             console.log(event.type, "Emitted");
-            console.log(event);
             handleEvent(event.data, event.type);
         }
     }

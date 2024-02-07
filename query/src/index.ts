@@ -56,7 +56,6 @@ const handleEvent = (data: Body, type: string) => {
   }
 
   if (type === "commentCreated") {
-    console.log("I created comment");
     if (data.postId)
       post[data.postId].comments.push({
         id: data.id,
@@ -66,7 +65,6 @@ const handleEvent = (data: Body, type: string) => {
   }
 
   if (type === "commentUpdated") {
-    console.log("I update comment");
     let comments;
     if (data.postId)
       comments = post[data.postId].comments.find(
@@ -101,8 +99,6 @@ app.listen(port, async () => {
 
     for (const event of res.data) {
       console.log(event.type, "Emitted");
-
-      console.log(event);
 
       handleEvent(event.data, event.type);
     }
