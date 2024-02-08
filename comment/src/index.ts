@@ -14,7 +14,6 @@ interface ReqBody {
   status: string;
 }
 
-// postId?: string;
 
 interface ReqEventBus {
   type: string;
@@ -111,6 +110,4 @@ app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });
 
-// 6220abdc
 
-// 6220abdc
