@@ -14,7 +14,6 @@ interface ReqBody {
   status: string;
 }
 
-
 interface ReqEventBus {
   type: string;
   data: ReqBody;
@@ -71,7 +70,7 @@ app.post(
       });
     } catch (error) {
       if (error instanceof Error) {
-        console.log(error.message);
+        console.error(error.message);
       }
     }
   }
@@ -109,5 +108,3 @@ const port = 4001;
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });
-
-
