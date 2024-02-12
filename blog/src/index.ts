@@ -64,5 +64,7 @@ app.post("/event", (req: Request, res: Response) => {
 const port = 4000;
 
 app.listen(port, () => {
+  console.log("V12");
+
   console.log(`Listening to port ${port}`);
 });
