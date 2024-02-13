@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-bus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: events-bus
+  template:
+    metadata:
+      labels:
+        app: events-bus
+    spec:
+      containers:
+        - name: event-bus
+          image: muhammad0320/events-bus
