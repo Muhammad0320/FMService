@@ -15,3 +15,17 @@ spec:
       containers:
         - name: events-bus
           image: muhammad0320/events-bus
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: events-bus-serv
+spec:
+  selector:
+    app: events-bus
+  ports:
+    - name: events-bus
+      protocol: TCP
+      port: 4005
+      targetPort: 4005
