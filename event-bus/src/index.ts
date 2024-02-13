@@ -25,7 +25,7 @@ app.post("/events", async (req: Request, res: Response) => {
 
   events.push(event);
 
-  await axios.post("http://posts-sev:4000/event", event).catch(console.log);
+  await axios.post("http://posts-serv:4000/event", event).catch(console.log);
   // await axios.post("http://localhost:4001/event", event).catch(console.log);
   // await axios.post("http://localhost:4002/event", event).catch(console.log);
   // await axios.post("http://localhost:4003/event", event).catch(console.log);
@@ -37,6 +37,7 @@ app.get("/events", (req: Request, res: Response) => {
   res.send(events);
 });
 
+// localhost:30607/posts
 const port = 4005;
 
 app.listen(port, () => {
