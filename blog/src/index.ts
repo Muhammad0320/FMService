@@ -64,6 +64,7 @@ app.post("/event", (req: Request, res: Response) => {
 });
 
 const port = 4000;
+console.log("Hi mom 2");
 
 app.listen(port, () => {
   console.log("V12");
