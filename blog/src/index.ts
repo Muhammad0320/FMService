@@ -47,7 +47,7 @@ app.post("/posts", async (req: ReqWithBoody, res: Response): Promise<void> => {
 
   res.status(201).send(posts[id]);
 
-  await axios.post("http://localhost:4005/events", {
+  await axios.post("http://events-bus-serv:4005/events", {
     type: "postsCreated",
     data: { id, content },
   });
@@ -68,3 +68,5 @@ app.listen(port, () => {
 
   console.log(`Listening to port ${port}`);
 });
+
+// localhost:30607/posts
