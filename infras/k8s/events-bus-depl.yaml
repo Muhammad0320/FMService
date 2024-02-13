@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: event-bus
+  name: events-bus
 spec:
   replicas: 1
   selector:
@@ -13,5 +13,5 @@ spec:
         app: events-bus
     spec:
       containers:
-        - name: event-bus
+        - name: events-bus
           image: muhammad0320/events-bus
