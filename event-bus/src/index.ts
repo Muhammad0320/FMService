@@ -40,6 +40,8 @@ app.get("/events", (req: Request, res: Response) => {
 // localhost:30607/posts
 const port = 4005;
 
+console.log("Hi mom 2");
+
 app.listen(port, () => {
   console.log("Just to check if it woks");
   console.log(`listening to port  ${port} `);
