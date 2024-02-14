@@ -95,7 +95,7 @@ app.listen(port, async () => {
   console.log(`App running on port ${port} `);
 
   try {
-    const res = await axios.get("http://localhost:4005/events");
+    const res = await axios.get("http://events-bus-serv:4005/events");
 
     for (const event of res.data) {
       console.log(event.type, "Emitted");
