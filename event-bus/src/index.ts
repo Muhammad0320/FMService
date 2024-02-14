@@ -25,7 +25,9 @@ app.post("/events", async (req: Request, res: Response) => {
 
   events.push(event);
 
-  await axios.post("http://posts-serv:4000/event", event).catch(console.log);
+  await axios
+    .post("http://post-clusterip-serv:4000/event", event)
+    .catch(console.log);
   // await axios.post("http://localhost:4001/event", event).catch(console.log);
   // await axios.post("http://localhost:4002/event", event).catch(console.log);
   // await axios.post("http://localhost:4003/event", event).catch(console.log);
