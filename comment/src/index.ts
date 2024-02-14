@@ -59,7 +59,7 @@ app.post(
     res.status(201).send(comments);
 
     try {
-      await axios.post("http://localhost:4005/events", {
+      await axios.post("http://events-bus-serv:4005/events", {
         type: "commentCreated",
         data: {
           id,
@@ -94,7 +94,7 @@ app.post("/event", async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    await axios.post("http://localhost:4005/events", {
+    await axios.post("http://events-bus-serv:4005/events", {
       type: "commentUpdated",
       data: comment,
     });

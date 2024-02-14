@@ -45,9 +45,9 @@ app.post("/posts", async (req: ReqWithBoody, res: Response): Promise<void> => {
     content,
   };
 
-  res.status(201).send(posts[id]);
-
   console.log("I was logged");
+
+  res.status(201).send(posts[id]);
 
   await axios.post("http://events-bus-serv:4005/events", {
     type: "postsCreated",
