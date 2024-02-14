@@ -28,9 +28,11 @@ app.post("/events", async (req: Request, res: Response) => {
   await axios
     .post("http://post-clusterip-serv:4000/event", event)
     .catch(console.log);
-  // await axios.post("http://localhost:4001/event", event).catch(console.log);
-  // await axios.post("http://localhost:4002/event", event).catch(console.log);
-  // await axios.post("http://localhost:4003/event", event).catch(console.log);
+  await axios.post("http://comments-serv:4001/event", event).catch(console.log);
+  await axios.post("http://query-serv:4002/event", event).catch(console.log);
+  await axios
+    .post("http://moderation-serv:4003/event", event)
+    .catch(console.log);
 
   res.send("OK");
 });
