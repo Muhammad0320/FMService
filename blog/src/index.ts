@@ -39,7 +39,7 @@ app.post("/posts", async (req: ReqWithBoody, res: Response): Promise<void> => {
   const id = randomBytes(4).toString("hex");
 
   const { content } = req.body;
-
+  
   posts[id] = {
     id,
     content,
