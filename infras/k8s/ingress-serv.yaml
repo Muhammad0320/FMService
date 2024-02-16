@@ -8,8 +8,8 @@ spec:
     - host: posts.com
       http:
         paths:
-          - path: /posts/?(.*)/comments
-            pathType: ImplementationSpecific
+          - path: /posts
+            pathType: Prefix
             backend:
               service:
                 name: post-clusterip-serv
