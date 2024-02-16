@@ -23,3 +23,11 @@ spec:
                 name: query-serv
                 port:
                   number: 4002
+
+          - path: /posts/?(.*)/comments
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: comments-serv
+                port:
+                  number: 4001
