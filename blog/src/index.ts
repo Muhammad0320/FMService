@@ -35,25 +35,28 @@ app.get("/posts", (req: Request, res: Response) => {
   res.send(posts);
 });
 
-app.post("/posts", async (req: ReqWithBoody, res: Response): Promise<void> => {
-  const id = randomBytes(4).toString("hex");
+app.post(
+  "/posts/create",
+  async (req: ReqWithBoody, res: Response): Promise<void> => {
+    const id = randomBytes(4).toString("hex");
 
-  const { content } = req.body;
-  
-  posts[id] = {
-    id,
-    content,
-  };
+    const { content } = req.body;
 
-  console.log("I was logged");
+    posts[id] = {
+      id,
+      content,
+    };
 
-  res.status(201).send(posts[id]);
+    console.log("I was logged");
 
-  await axios.post("http://events-bus-serv:4005/events", {
-    type: "postsCreated",
-    data: { id, content },
-  });
-});
+    res.status(201).send(posts[id]);
+
+    await axios.post("http://events-bus-serv:4005/events", {
+      type: "postsCreated",
+      data: { id, content },
+    });
+  }
+);
 
 app.post("/event", (req: Request, res: Response) => {
   const result: ReqEventBus = req.body;
@@ -72,4 +75,4 @@ app.listen(port, () => {
   console.log(`Listening to port ${port}`);
 });
 
-// localhost:30607/posts
+// 127.0.0.1/posts
