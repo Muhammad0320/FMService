@@ -33,7 +33,7 @@ spec:
                   number: 4001
 
           - path: /?(.*)
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: client-serv
