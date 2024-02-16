@@ -15,3 +15,11 @@ spec:
                 name: post-clusterip-serv
                 port:
                   number: 4000
+
+          - path: /posts
+            pathType: Prefix
+            backend:
+              service:
+                name: query-serv
+                port:
+                  number: 4002
