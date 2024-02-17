@@ -23,3 +23,11 @@ build:
         manual:
           - src: "build/*.js"
             dest: .
+    - image: muhammad0320/query
+      context: query
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "build/*.js"
+            dest: .
