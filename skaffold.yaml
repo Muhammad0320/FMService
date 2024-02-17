@@ -31,3 +31,11 @@ build:
         manual:
           - src: "build/*.js"
             dest: .
+    - image: muhammad0320/moderation
+      context: moderation
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "build/*.js"
+            dest: .
