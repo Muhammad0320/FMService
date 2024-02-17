@@ -47,3 +47,11 @@ build:
         manual:
           - src: "build/*.js"
             dest: .
+    - image: muhammad0320/posts
+      context: blog
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "build/*.js"
+            dest: .
