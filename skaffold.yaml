@@ -15,3 +15,11 @@ build:
         manual:
           - src: "src/**/*.js"
             dest: .
+    - image: muhammad0320/comments
+      context: comment
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "build/*.js"
+            dest: .
