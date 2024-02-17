@@ -39,3 +39,11 @@ build:
         manual:
           - src: "build/*.js"
             dest: .
+    - image: muhammad0320/events-bus
+      context: event-bus
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "build/*.js"
+            dest: .
