@@ -25,15 +25,16 @@ const posts = {};
 app.get("/posts", (req, res) => {
     res.send(posts);
 });
-app.post("/posts", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post("/posts/create", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = (0, crypto_1.randomBytes)(4).toString("hex");
     const { content } = req.body;
     posts[id] = {
         id,
         content,
     };
+    console.log("I was logged");
     res.status(201).send(posts[id]);
-    yield axios_1.default.post("http://localhost:4005/events", {
+    yield axios_1.default.post("http://events-bus-serv:4005/events", {
         type: "postsCreated",
         data: { id, content },
     });
@@ -44,6 +45,8 @@ app.post("/event", (req, res) => {
     res.send({});
 });
 const port = 4000;
+console.log("Hi mom 2");
 app.listen(port, () => {
     console.log(`Listening to port ${port}`);
+    console.log("V12");
 });

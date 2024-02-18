@@ -39,7 +39,7 @@ app.post("/posts/:id/comments", (req, res) => __awaiter(void 0, void 0, void 0, 
     commentsByPostId[postId] = comments;
     res.status(201).send(comments);
     try {
-        yield axios_1.default.post("http://localhost:4005/events", {
+        yield axios_1.default.post("http://events-bus-serv:4005/events", {
             type: "commentCreated",
             data: {
                 id,
@@ -51,7 +51,7 @@ app.post("/posts/:id/comments", (req, res) => __awaiter(void 0, void 0, void 0, 
     }
     catch (error) {
         if (error instanceof Error) {
-            console.log(error.message);
+            console.error(error.message);
         }
     }
 }));
@@ -67,7 +67,7 @@ app.post("/event", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         else {
             return;
         }
-        yield axios_1.default.post("http://localhost:4005/events", {
+        yield axios_1.default.post("http://events-bus-serv:4005/events", {
             type: "commentUpdated",
             data: comment,
         });
@@ -78,5 +78,3 @@ const port = 4001;
 app.listen(port, () => {
     console.log(`App running on port ${port}`);
 });
-// 6220abdc
-// 6220abdc

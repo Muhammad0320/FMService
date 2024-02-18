@@ -22,16 +22,23 @@ let events = [];
 app.post("/events", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const event = req.body;
     events.push(event);
-    yield axios_1.default.post("http://localhost:4000/event", event).catch(console.log);
-    yield axios_1.default.post("http://localhost:4001/event", event).catch(console.log);
-    yield axios_1.default.post("http://localhost:4002/event", event).catch(console.log);
-    yield axios_1.default.post("http://localhost:4003/event", event).catch(console.log);
+    yield axios_1.default
+        .post("http://post-clusterip-serv:4000/event", event)
+        .catch(console.log);
+    yield axios_1.default.post("http://comments-serv:4001/event", event).catch(console.log);
+    yield axios_1.default.post("http://query-serv:4002/event", event).catch(console.log);
+    yield axios_1.default
+        .post("http://moderation-serv:4003/event", event)
+        .catch(console.log);
     res.send("OK");
 }));
 app.get("/events", (req, res) => {
     res.send(events);
 });
+// localhost:30607/posts
 const port = 4005;
+console.log("Hi mom 2");
 app.listen(port, () => {
+    console.log("Just to check if it woks");
     console.log(`listening to port  ${port} `);
 });

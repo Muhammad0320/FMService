@@ -70,9 +70,6 @@ const port = 4000;
 console.log("Hi mom 2");
 
 app.listen(port, () => {
-  console.log("V12");
-
   console.log(`Listening to port ${port}`);
+  console.log("V12");
 });
-
-// 127.0.0.1/posts
